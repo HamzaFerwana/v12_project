@@ -16,7 +16,7 @@ class CheckUserType
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd(Auth::user());
+        if(Auth::user()->type == 'employee') return redirect('not_allowed');
         return $next($request);
     }
 }

@@ -17,7 +17,7 @@
         <li class="nav-item">
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+                <span>{{ __('admin.dashboard') }}</span></a>
         </li>
 
         <!-- Divider -->
@@ -30,7 +30,7 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProject"
                 aria-expanded="true" aria-controls="collapseProject">
                 <i class="fas fa-fw fa-briefcase"></i>
-                <span>Projects</span>
+                <span>{{ __('admin.pro') }}</span>
             </a>
             <div id="collapseProject" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
