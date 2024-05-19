@@ -12,7 +12,7 @@ return [
 'all_pro' => 'All Projects',
 'propos' => 'Proposals',
 'all_propos' => 'All Proposals',
-'freelancer' => 'Freelancer'
-
+'freelancer' => 'Freelancer',
+'add' => 'Add'
 
 ];

@@ -13,6 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('adminassets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -20,10 +21,73 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('adminassets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 @yield('styles')
+
+@if (App::getlocale() == 'ar')
+<style>
+
+body {
+    direction: rtl;
+    text-align: right
+}
+
+.sidebar{
+    padding: 0;
+}
+
+.sidebar .nav-item .nav-link{
+    text-align: right
+}
+
+.sidebar .nav-item .nav-link[data-toggle=collapse]::after{
+    float: left;
+}
+
+.ml-md-3, .mx-md-3 {
+        margin-right: 1rem !important;
+        margin-left: unset !important;
+    }
+
+    .input-group>.input-group-append>.btn, .input-group>.input-group-append>.input-group-text, .input-group>.input-group-prepend:first-child>.btn:not(:first-child), .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child), .input-group>.input-group-prepend:not(:first-child)>.btn, .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+    border-top-left-radius: .35rem;
+    border-bottom-left-radius: .35rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+</style>
+@endif
+
+<style>
+    .flags{
+    opacity: .6;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    /* object-fit: cover; */
+    box-shadow: 0 0 10px #555
+}
+
+.flags.active {
+    opacity: 1;
+
+}
+
+.ml-auto, .mx-auto {
+    margin-right: auto !important;
+    margin-left: unset !important;
+}
+
+.ml-auto, .mx-auto {
+    margin-right: unset !important;
+    margin-left: auto;
+}
+</style>
+
 </head>
 
 <body id="page-top">
-
+{{-- @dump(App::getlocale()) --}}
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -41,15 +105,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <ul>
-                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                            <li>
-                                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                    {{ $properties['native'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
+
+
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -95,6 +152,24 @@
                                 </form>
                             </div>
                         </li>
+
+
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <li class="nav-item">
+                                    <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+
+                                        {{-- <img src="{{ asset('adminassets/img/') }}" width="30">
+                                      <img src="{{ asset('adminassets/img/'. $localeCode .'.jpg') }}" width="30"> --}}
+
+                                        <img src="{{ asset('adminassets/img/' . $properties['flag'] ) }}" width="30" class="flags {{ App::getlocale() == $localeCode  ? 'active' : '' }}">
+
+
+
+
+                                    </a>
+                                </li>
+                            @endforeach
+
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -146,6 +221,8 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
+
+
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -230,19 +307,19 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
+                      <form hidden action="{{ route('logout') }}" method="POST" id="logout-form">
+                        @csrf
+                        <button class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </button>
+
+                    </form>
                             </div>
                         </li>
 

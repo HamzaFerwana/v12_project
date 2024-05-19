@@ -12,7 +12,7 @@ return [
 'all_pro' => 'جميع المشاريع',
 'propos' => 'العروض',
 'all_propos' => 'جميع العروض',
-'freelancer' => 'المستقلين'
-
+'freelancer' => 'المستقلين',
+'add' => 'إضافة'
 
 ];

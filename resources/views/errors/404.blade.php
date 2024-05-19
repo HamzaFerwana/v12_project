@@ -61,7 +61,7 @@ body
     </style>
 </head>
 <body>
-    <a target="_blank" href="https://codepen.io/uiswarup/pen/XWGGyWQ">
+    <a  href="">
         <div class="container">
         <div class="row">
           <div class="col-sm-12 col-md-12 mt-5 mb-5">
